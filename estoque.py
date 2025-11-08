@@ -185,15 +185,18 @@ canvas_dict = {}
 
 def limpar_graficos():
     for widget in frame_scroll.winfo_children():
-        if isinstance(widget, ctk.CTkLabel) or isinstance(widget, ctk.CTkButton):
+        if isinstance(widget, ctk.CTkButton):
             continue
         widget.destroy()
+
     for key in list(canvas_dict.keys()):
         canvas_dict[key] = None
 
 
 def atualizar_graficos():
     limpar_graficos()
+    
+    frame_scroll.update_idletasks()
 
     cur.execute("SELECT nome, quantidade FROM estoque")
     produtos = cur.fetchall()
